@@ -3,531 +3,363 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resultados Esperados e Indicadores dos Projetos GEAP</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <title>Plano Estratégico de Redução do Custo Assistencial</title>
     <style>
-        .projeto-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --border-radius: 8px;
         }
-        .projeto-content.active {
-            max-height: 2000px;
-            transition: max-height 0.5s ease-in;
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        .hover-scale {
-            transition: transform 0.2s;
+        
+        body {
+            background-color: #f8f9fa;
+            color: var(--dark);
+            line-height: 1.6;
         }
-        .hover-scale:hover {
-            transform: scale(1.02);
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+        
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+            margin-bottom: 20px;
+        }
+        
+        .back-button:hover {
+            background-color: #1a252f;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        h1 {
+            font-size: 26px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .summary-cards {
+            background-color: white;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        .summary-card {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            width: calc(33.333% - 10px);
+        }
+        
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        
+        .icon-blue {
+            background-color: rgba(52, 152, 219, 0.1);
+            color: #3498db;
+        }
+        
+        .icon-green {
+            background-color: rgba(46, 204, 113, 0.1);
+            color: #2ecc71;
+        }
+        
+        .icon-purple {
+            background-color: rgba(155, 89, 182, 0.1);
+            color: #9b59b6;
+        }
+        
+        .card-content h3 {
+            font-size: 14px;
+            font-weight: 500;
+            color: #95a5a6;
+            margin-bottom: 5px;
+        }
+        
+        .card-content p {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        /* Strategic Framework Categories */
+        .category {
+            margin-bottom: 30px;
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .category-label {
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: bold;
+            width: 150px;
+            text-align: left;
+        }
+        
+        .category-line {
+            height: 2px;
+            flex-grow: 1;
+            margin-left: 15px;
+        }
+        
+        .financial {
+            background-color: #D4AF37;
+        }
+        
+        .clients {
+            background-color: #3458B0;
+        }
+        
+        .processes {
+            background-color: #2A2A2A;
+        }
+        
+        .items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .item {
+            display: flex;
+            width: calc(33.333% - 10px);
+            transition: transform 0.3s ease;
+        }
+        
+        .item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .item-code {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-right: 10px;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+        
+        .item-text {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            transition: box-shadow 0.3s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .summary-card {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+            
+            h1 {
+                font-size: 22px;
+            }
+            
+            .item {
+                width: 100%;
+            }
         }
     </style>
 </head>
-<body class="min-h-screen bg-gray-100 p-4">
-    <div class="max-w-6xl mx-auto">
-        <header class="mb-8 text-center">
-            <img src="/api/placeholder/150/50" alt="GEAP Logo" class="h-12 mb-4 mx-auto">
-            <h1 class="text-3xl font-bold text-gray-900 mb-2">RESULTADOS ESPERADOS E INDICADORES DOS PROJETOS</h1>
-            <p class="text-gray-600">Plano Estratégico de Redução do Custo Assistencial</p>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-button">← Voltar para a Página Inicial</a>
+        
+        <header>
+            <h1>PLANO ESTRATÉGICO DE REDUÇÃO DO CUSTO ASSISTENCIAL</h1>
+            <p class="subtitle">Visão Geral do Investimento e Retorno</p>
         </header>
         
-        <div id="projetos-container" class="space-y-4">
-            <!-- Projeto 1 -->
-            <div class="projeto-item mb-4 border border-gray-200 rounded-lg shadow-sm overflow-hidden bg-white hover:shadow-md transition-shadow duration-200">
-                <div class="flex items-center justify-between p-4 cursor-pointer transition-colors hover:bg-gray-50 projeto-header" onclick="toggleProject(1)">
-                    <div class="flex items-center">
-                        <div class="flex flex-col md:flex-row md:items-center">
-                            <span class="font-semibold text-lg text-gray-800 projeto-titulo">
-                                <span class="w-3 h-3 bg-green-500 rounded-full inline-block mr-2"></span>Projeto 1: Modelo-base de regras sistêmicas
-                            </span>
-                    </div>
-        
-        <footer class="text-center text-gray-500 text-sm mt-8 pt-4 border-t border-gray-200">
-            <p class="mb-2">Última atualização: Abril/2025</p>
-            <p>© GEAP Saúde - Todos os direitos reservados</p>
-        </footer>
-    </div>
-
-    <script>
-        // Função para mostrar/ocultar detalhes do projeto
-        function toggleProject(id) {
-            const content = document.getElementById(`projeto-content-${id}`);
-            const toggleIcon = document.querySelector(`.toggle-icon-${id}`);
+        <div class="summary-cards">
+            <div class="summary-card">
+                <div class="card-icon icon-blue">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                </div>
+                <div class="card-content">
+                    <h3>Investimento Total</h3>
+                    <p>R$ 6.189.635,56</p>
+                </div>
+            </div>
             
-            if (content.classList.contains('active')) {
-                content.classList.remove('active');
-                toggleIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-gray-500"><polyline points="6 9 12 15 18 9"></polyline></svg>';
-            } else {
-                content.classList.add('active');
-                toggleIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-gray-500"><polyline points="18 15 12 9 6 15"></polyline></svg>';
-            }
-        }
+            <div class="summary-card">
+                <div class="card-icon icon-green">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                        <polyline points="17 6 23 6 23 12"></polyline>
+                    </svg>
+                </div>
+                <div class="card-content">
+                    <h3>Economia Projetada</h3>
+                    <p>R$ 326.047.657,33</p>
+                </div>
+            </div>
+            
+            <div class="summary-card">
+                <div class="card-icon icon-purple">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                    </svg>
+                </div>
+                <div class="card-content">
+                    <h3>ROI Global Estimado</h3>
+                    <p>52,7x</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Strategic Framework -->
+        <div class="category">
+            <div class="category-header">
+                <div class="category-label financial">Financeira</div>
+                <div class="category-line financial"></div>
+            </div>
+            <div class="items">
+                <div class="item">
+                    <div class="item-code financial">F1</div>
+                    <div class="item-text">Garantir o equilíbrio econômico-financeiro.</div>
+                </div>
+                <div class="item">
+                    <div class="item-code financial">F2</div>
+                    <div class="item-text">Garantir a sinistralidade abaixo de 85%.</div>
+                </div>
+                <div class="item">
+                    <div class="item-code financial">F3</div>
+                    <div class="item-text">Promover o crescimento de receitas.</div>
+                </div>
+            </div>
+        </div>
 
-        // Expandir todos os projetos
-        document.getElementById('expand-all').addEventListener('click', function() {
-            document.querySelectorAll('.projeto-content').forEach(content => {
-                content.classList.add('active');
-            });
-            document.querySelectorAll('[class^="toggle-icon-"]').forEach(icon => {
-                icon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-gray-500"><polyline points="18 15 12 9 6 15"></polyline></svg>';
-            });
-        });
+        <!-- Clients Category -->
+        <div class="category">
+            <div class="category-header">
+                <div class="category-label clients">Clientes</div>
+                <div class="category-line clients"></div>
+            </div>
+            <div class="items">
+                <div class="item">
+                    <div class="item-code clients">C1</div>
+                    <div class="item-text">Fidelizar os beneficiários.</div>
+                </div>
+                <div class="item">
+                    <div class="item-code clients">C2</div>
+                    <div class="item-text">Oferecer produtos competitivos.</div>
+                </div>
+                <div class="item">
+                    <div class="item-code clients">C3</div>
+                    <div class="item-text">Ampliar a carteira com sustentabilidade.</div>
+                </div>
+            </div>
+        </div>
 
-        // Recolher todos os projetos
-        document.getElementById('collapse-all').addEventListener('click', function() {
-            document.querySelectorAll('.projeto-content').forEach(content => {
-                content.classList.remove('active');
+        <!-- Internal Processes Category -->
+        <div class="category">
+            <div class="category-header">
+                <div class="category-label processes">Processos Internos</div>
+                <div class="category-line processes"></div>
+            </div>
+            <div class="items">
+                <div class="item">
+                    <div class="item-code processes">P1</div>
+                    <div class="item-text">Garantir assistência à saúde de qualidade</div>
+                </div>
+                <div class="item">
+                    <div class="item-code processes">P2</div>
+                    <div class="item-text">Assegurar uma rede assistencial suficiente e de qualidade</div>
+                </div>
+                <div class="item">
+                    <div class="item-code processes">P3</div>
+                    <div class="item-text">Garantir boas práticas de gestão organizacional e em saúde</div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <script>
+        // Simple hover effect enhancement
+        document.querySelectorAll('.item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                const itemCode = this.querySelector('.item-code');
+                const itemText = this.querySelector('.item-text');
+                
+                itemCode.style.transform = 'scale(1.1)';
+                itemText.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.15)';
             });
-            document.querySelectorAll('[class^="toggle-icon-"]').forEach(icon => {
-                icon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-gray-500"><polyline points="6 9 12 15 18 9"></polyline></svg>';
+            
+            item.addEventListener('mouseleave', function() {
+                const itemCode = this.querySelector('.item-code');
+                const itemText = this.querySelector('.item-text');
+                
+                itemCode.style.transform = 'scale(1)';
+                itemText.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.08)';
             });
         });
     </script>
 </body>
 </html>
-                    </div>
-                    <div class="flex items-center">
-                        <span class="toggle-icon-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-gray-500"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                        </span>
-                    </div>
-                </div>
-                
-                <div id="projeto-content-1" class="projeto-content border-t border-gray-200 bg-gray-50">
-                    <div class="p-4">
-                        <div class="mb-6">
-                            <h4 class="text-sm font-semibold uppercase text-gray-500 mb-2">Resultados Esperados</h4>
-                            <div class="space-y-2">
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-green-500 mr-2 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Reduzir o custo médio por beneficiário internado em UTIs</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-green-500 mr-2 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Diminuição de 10% na taxa de mortalidade padronizada em UTI</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <h4 class="text-sm font-semibold uppercase text-gray-500 mb-2">Indicadores</h4>
-                            <div class="space-y-2">
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-blue-500 mr-2 flex-shrink-0"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Tempo médio de internação em UTIs</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-blue-500 mr-2 flex-shrink-0"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Taxa de complicações pós-operatórias</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-blue-500 mr-2 flex-shrink-0"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Custo médio por beneficiário internado em UTIs</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-blue-500 mr-2 flex-shrink-0"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Taxa de mortalidade padronizada</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Projeto 5 -->
-            <div class="projeto-item mb-4 border border-gray-200 rounded-lg shadow-sm overflow-hidden bg-white hover:shadow-md transition-shadow duration-200">
-                <div class="flex items-center justify-between p-4 cursor-pointer transition-colors hover:bg-gray-50 projeto-header" onclick="toggleProject(5)">
-                    <div class="flex items-center">
-                        <div class="flex flex-col md:flex-row md:items-center">
-                            <span class="font-semibold text-lg text-gray-800 projeto-titulo">
-                                <span class="w-3 h-3 bg-green-500 rounded-full inline-block mr-2"></span>Projeto 5: Gestão de doenças crônicas
-                            </span>
-                        </div>
-                    </div>
-                    <div class="flex items-center">
-                        <span class="toggle-icon-5">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-gray-500"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                        </span>
-                    </div>
-                </div>
-                
-                <div id="projeto-content-5" class="projeto-content border-t border-gray-200 bg-gray-50">
-                    <div class="p-4">
-                        <div class="mb-6">
-                            <h4 class="text-sm font-semibold uppercase text-gray-500 mb-2">Resultados Esperados</h4>
-                            <div class="space-y-2">
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-green-500 mr-2 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Reduzir hospitalizações e melhorar adesão ao tratamento</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <h4 class="text-sm font-semibold uppercase text-gray-500 mb-2">Indicadores</h4>
-                            <div class="space-y-2">
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-blue-500 mr-2 flex-shrink-0"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                                    <span class="text-sm text-gray-700">A definir</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Projetos 7-12: Renegociação com prestadores -->
-            <div class="projeto-item mb-4 border border-gray-200 rounded-lg shadow-sm overflow-hidden bg-white hover:shadow-md transition-shadow duration-200">
-                <div class="flex items-center justify-between p-4 cursor-pointer transition-colors hover:bg-gray-50 projeto-header" onclick="toggleProject(7)">
-                    <div class="flex items-center">
-                        <div class="flex flex-col md:flex-row md:items-center">
-                            <span class="font-semibold text-lg text-gray-800 projeto-titulo">
-                                <span class="w-3 h-3 bg-green-500 rounded-full inline-block mr-2"></span>Projetos 7-12: Renegociação com prestadores por especialidade
-                            </span>
-                        </div>
-                    </div>
-                    <div class="flex items-center">
-                        <span class="toggle-icon-7">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-gray-500"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                        </span>
-                    </div>
-                </div>
-                
-                <div id="projeto-content-7" class="projeto-content border-t border-gray-200 bg-gray-50">
-                    <div class="p-4">
-                        <div class="mb-6">
-                            <h4 class="text-sm font-semibold uppercase text-gray-500 mb-2">Resultados Esperados</h4>
-                            <div class="space-y-2">
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-green-500 mr-2 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Redução de 10-18% no valor médio dos procedimentos</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-green-500 mr-2 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Implementação de pacotes para procedimentos de alto volume</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-green-500 mr-2 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Estabelecimento de protocolos de autorização e segunda opinião</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <h4 class="text-sm font-semibold uppercase text-gray-500 mb-2">Indicadores</h4>
-                            <div class="space-y-2">
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-blue-500 mr-2 flex-shrink-0"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Custo per capita com a especialidade</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-blue-500 mr-2 flex-shrink-0"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Quantidade de auditorias concorrentes realizadas</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-blue-500 mr-2 flex-shrink-0"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Percentual de procedimentos realizados dentro de pacotes</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Projeto 13 -->
-            <div class="projeto-item mb-4 border border-gray-200 rounded-lg shadow-sm overflow-hidden bg-white hover:shadow-md transition-shadow duration-200">
-                <div class="flex items-center justify-between p-4 cursor-pointer transition-colors hover:bg-gray-50 projeto-header" onclick="toggleProject(13)">
-                    <div class="flex items-center">
-                        <div class="flex flex-col md:flex-row md:items-center">
-                            <span class="font-semibold text-lg text-gray-800 projeto-titulo">
-                                <span class="w-3 h-3 bg-orange-500 rounded-full inline-block mr-2"></span>Projeto 13: Alteração do fluxo regulatório - Cânula de bloqueio/infiltração
-                            </span>
-                        </div>
-                    </div>
-                    <div class="flex items-center">
-                        <span class="toggle-icon-13">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-gray-500"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                        </span>
-                    </div>
-                </div>
-                
-                <div id="projeto-content-13" class="projeto-content border-t border-gray-200 bg-gray-50">
-                    <div class="p-4">
-                        <div class="mb-6">
-                            <h4 class="text-sm font-semibold uppercase text-gray-500 mb-2">Resultados Esperados</h4>
-                            <div class="space-y-2">
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-green-500 mr-2 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Redução no custo dos procedimentos com cânula de bloqueio/infiltração</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-green-500 mr-2 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Padronização do uso deste material conforme protocolos clínicos</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-green-500 mr-2 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Eliminação de cobranças indevidas</span>
-                                </div>
-                            
-            <div class="projeto-item mb-4 border border-gray-200 rounded-lg shadow-sm overflow-hidden bg-white hover:shadow-md transition-shadow duration-200">
-                <div class="flex items-center justify-between p-4 cursor-pointer transition-colors hover:bg-gray-50 projeto-header" onclick="toggleProject(6)">
-                    <div class="flex items-center">
-                        <div class="flex flex-col md:flex-row md:items-center">
-                            <span class="font-semibold text-lg text-gray-800 projeto-titulo">
-                                <span class="w-3 h-3 bg-green-500 rounded-full inline-block mr-2"></span>Projeto 6: Auditoria estratégica de qualidade
-                            </span>
-                        </div>
-                    </div>
-                    <div class="flex items-center">
-                        <span class="toggle-icon-6">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-gray-500"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                        </span>
-                    </div>
-                </div>
-                
-                <div id="projeto-content-6" class="projeto-content border-t border-gray-200 bg-gray-50">
-                    <div class="p-4">
-                        <div class="mb-6">
-                            <h4 class="text-sm font-semibold uppercase text-gray-500 mb-2">Resultados Esperados</h4>
-                            <div class="space-y-2">
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-green-500 mr-2 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Identificar e corrigir 95% das inconformidades de cobrança acima de R$ 5.000</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-green-500 mr-2 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Reduzir em 25% as glosas contestadas</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-green-500 mr-2 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Aumentar em 30% a recuperação de valores cobrados indevidamente</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-green-500 mr-2 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Aumentar o percentual de procedimentos de alto custo com auditoria proativa</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <h4 class="text-sm font-semibold uppercase text-gray-500 mb-2">Indicadores</h4>
-                            <div class="space-y-2">
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-blue-500 mr-2 flex-shrink-0"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Percentual de inconformidades identificadas e corrigidas</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-blue-500 mr-2 flex-shrink-0"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Taxa de glosas contestadas</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-blue-500 mr-2 flex-shrink-0"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Taxa de recuperação de valores indevidos</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-blue-500 mr-2 flex-shrink-0"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Percentual de procedimentos de alto custo auditados proativamente</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>line points="22 4 12 14.01 9 11.01"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Reduzir os custos assistenciais em 5,8% em relação a 2024</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-green-500 mr-2 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Assegurar conformidade com as regulamentações da ANS</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-green-500 mr-2 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Excluir a necessidade de conferências manuais pelos auditores</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <h4 class="text-sm font-semibold uppercase text-gray-500 mb-2">Indicadores</h4>
-                            <div class="space-y-2">
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-blue-500 mr-2 flex-shrink-0"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Índice de sinistralidade</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-blue-500 mr-2 flex-shrink-0"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Porcentagem de glosas</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-blue-500 mr-2 flex-shrink-0"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Taxa de inconsistências nas autorizações</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Projeto 2 -->
-            <div class="projeto-item mb-4 border border-gray-200 rounded-lg shadow-sm overflow-hidden bg-white hover:shadow-md transition-shadow duration-200">
-                <div class="flex items-center justify-between p-4 cursor-pointer transition-colors hover:bg-gray-50 projeto-header" onclick="toggleProject(2)">
-                    <div class="flex items-center">
-                        <div class="flex flex-col md:flex-row md:items-center">
-                            <span class="font-semibold text-lg text-gray-800 projeto-titulo">
-                                <span class="w-3 h-3 bg-green-500 rounded-full inline-block mr-2"></span>Projeto 2: Linha do paciente cirúrgico - FinX
-                            </span>
-                        </div>
-                    </div>
-                    <div class="flex items-center">
-                        <span class="toggle-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-gray-500"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                        </span>
-                    </div>
-                </div>
-                
-                <div id="projeto-content-2" class="projeto-content border-t border-gray-200 bg-gray-50">
-                    <div class="p-4">
-                        <div class="mb-6">
-                            <h4 class="text-sm font-semibold uppercase text-gray-500 mb-2">Resultados Esperados</h4>
-                            <div class="space-y-2">
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-green-500 mr-2 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Redução dos custos assistenciais decorrentes de cirurgias</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-green-500 mr-2 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Diminuição das taxas de complicações pós-operatórias em 15%</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-green-500 mr-2 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Aumento da satisfação dos pacientes em 25%</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-green-500 mr-2 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Redução do tempo médio de internação em 20% para as 10 cirurgias mais frequentes</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <h4 class="text-sm font-semibold uppercase text-gray-500 mb-2">Indicadores</h4>
-                            <div class="space-y-2">
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-blue-500 mr-2 flex-shrink-0"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Taxa de complicações pós-operatórias</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-blue-500 mr-2 flex-shrink-0"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Custo assistencial decorrente de cirurgias eletivas e emergenciais</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-blue-500 mr-2 flex-shrink-0"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Nível de satisfação dos pacientes (NPS)</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-blue-500 mr-2 flex-shrink-0"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Tempo médio de internação</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Projeto 3 -->
-            <div class="projeto-item mb-4 border border-gray-200 rounded-lg shadow-sm overflow-hidden bg-white hover:shadow-md transition-shadow duration-200">
-                <div class="flex items-center justify-between p-4 cursor-pointer transition-colors hover:bg-gray-50 projeto-header" onclick="toggleProject(3)">
-                    <div class="flex items-center">
-                        <div class="flex flex-col md:flex-row md:items-center">
-                            <span class="font-semibold text-lg text-gray-800 projeto-titulo">
-                                <span class="w-3 h-3 bg-orange-500 rounded-full inline-block mr-2"></span>Projeto 3: Cuidado integral ao beneficiário hospitalizado
-                            </span>
-                        </div>
-                    </div>
-                    <div class="flex items-center">
-                        <span class="toggle-icon-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-gray-500"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                        </span>
-                    </div>
-                </div>
-                
-                <div id="projeto-content-3" class="projeto-content border-t border-gray-200 bg-gray-50">
-                    <div class="p-4">
-                        <div class="mb-6">
-                            <h4 class="text-sm font-semibold uppercase text-gray-500 mb-2">Resultados Esperados</h4>
-                            <div class="space-y-2">
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-green-500 mr-2 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Aumentar o percentual de altas estruturadas para 30%</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-green-500 mr-2 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Diminuir o tempo de autorização de procedimentos e OPMEs para até 24 horas úteis</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-green-500 mr-2 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Reduzir o tempo médio de internação para 7 dias</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-green-500 mr-2 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Redução de 12% no número de exames complementares desnecessários</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <h4 class="text-sm font-semibold uppercase text-gray-500 mb-2">Indicadores</h4>
-                            <div class="space-y-2">
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-blue-500 mr-2 flex-shrink-0"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Percentual de altas estruturadas</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-blue-500 mr-2 flex-shrink-0"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Tempo médio de autorização de procedimentos e OPMEs</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-blue-500 mr-2 flex-shrink-0"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Tempo médio de internação</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-blue-500 mr-2 flex-shrink-0"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Número de exames complementares por internação</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Projeto 4 -->
-            <div class="projeto-item mb-4 border border-gray-200 rounded-lg shadow-sm overflow-hidden bg-white hover:shadow-md transition-shadow duration-200">
-                <div class="flex items-center justify-between p-4 cursor-pointer transition-colors hover:bg-gray-50 projeto-header" onclick="toggleProject(4)">
-                    <div class="flex items-center">
-                        <div class="flex flex-col md:flex-row md:items-center">
-                            <span class="font-semibold text-lg text-gray-800 projeto-titulo">
-                                <span class="w-3 h-3 bg-orange-500 rounded-full inline-block mr-2"></span>Projeto 4: Controle no atendimento hospitalar intensivista - Telegrave
-                            </span>
-                        </div>
-                    </div>
-                    <div class="flex items-center">
-                        <span class="toggle-icon-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-gray-500"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                        </span>
-                    </div>
-                </div>
-                
-                <div id="projeto-content-4" class="projeto-content border-t border-gray-200 bg-gray-50">
-                    <div class="p-4">
-                        <div class="mb-6">
-                            <h4 class="text-sm font-semibold uppercase text-gray-500 mb-2">Resultados Esperados</h4>
-                            <div class="space-y-2">
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-green-500 mr-2 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Redução do tempo médio de internação em UTIs</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-green-500 mr-2 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                                    <span class="text-sm text-gray-700">Reduzir a taxa de complicações pós-operatórias</span>
-                                </div>
-                                <div class="flex items-center bg-white p-2 rounded border border-gray-200 hover-scale">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-green-500 mr-2 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><poly
